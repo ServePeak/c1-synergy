@@ -21,6 +21,7 @@ var pet_pay = 0;
 
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
+  game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
   game.stage.disableVisibilityChange = true;
 }
 
@@ -31,11 +32,16 @@ function create() {
   rent_button = game.add.button(10, 60, 'button', test, this, 0, 0, 2);
   pet_button = game.add.button(10, 90, 'button', test, this, 0, 0, 2);
   car_button = game.add.button(10, 120, 'button', test, this, 0, 0, 2);
+  house_upgrade_button = game.add.button(910, 30, 'square', test, this, 1, 1, 1);
+  car_upgrade_button = game.add.button(860, 30, 'square', test, this, 1, 1, 1);
+  family_upgrade_button = game.add.button(810, 30, 'square', test, this, 1, 1, 1);
+  pet_upgrade_button = game.add.button(760, 30, 'square', test, this, 1, 1, 1);
+  lottery_upgrade_button = game.add.button(710, 30, 'square', test, this, 1, 1, 1);
 
   credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "12px Arial", fill: "000000"});
-  income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "12px Arial", fill: "000000"});
-  cash_text = game.add.text(360, 570, "Cash: " + cash, { font: "12px Arial", fill: "000000"});
-  time_text = game.add.text(600, 570, "Time: " + time + " hours", { font: "12px Arial", fill: "000000"});
+  income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "000000"});
+  cash_text = game.add.text(490, 570, "Cash: " + cash, { font: "16px Arial", fill: "000000"});
+  time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "000000"});
   home_rent_text = game.add.text(20, 67, "Pay rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
   car_pay_text = game.add.text(20, 97, "Pay car fee: " + car_pay,  { font: "12px Arial", fill: "000000"});
   pet_pay_text = game.add.text(20, 127, "Pay pet fee: " + pet_pay, { font: "12px Arial", fill: "000000"})
