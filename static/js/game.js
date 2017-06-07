@@ -40,7 +40,7 @@ function create() {
 
   credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "12px Arial", fill: "000000"});
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "000000"});
-  cash_text = game.add.text(490, 570, "Cash: " + cash, { font: "16px Arial", fill: "000000"});
+  cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "000000"});
   time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "000000"});
   home_rent_text = game.add.text(20, 67, "Pay rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
   car_pay_text = game.add.text(20, 97, "Pay car fee: " + car_pay,  { font: "12px Arial", fill: "000000"});
