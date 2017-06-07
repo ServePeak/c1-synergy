@@ -13,6 +13,7 @@ var credit_score = 650;
 var income = 1;
 var cash = 0;
 var old_time = 0;
+var real_time = 0;
 var time = 0;
 var home_rent = 0;
 var car_pay = 0;
@@ -20,6 +21,7 @@ var pet_pay = 0;
 
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
+  game.stage.disableVisibilityChange = true;
 }
 
 function create() {
@@ -45,12 +47,16 @@ function test() {
 }
 
 function update() {
-  old_time = time;
-  time = Math.floor(this.game.time.totalElapsedSeconds());
-  time_text.setText("Time: " + time + " hours");
+  var current_time = this.game.time.totalElapsedSeconds();
+  if (old_time + 0.082 < current_time) {
+    old_time = current_time;
+  }
+  real_time = current_time;
 
-  if (time > old_time) {
+  if (old_time == real_time) {
       cash += income;
       cash_text.setText("Cash: " + cash);
+      time++;
+      time_text.setText("Time: " + time + " hours");
   }
 }
