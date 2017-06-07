@@ -35,7 +35,7 @@ function create() {
   credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "12px Arial", fill: "000000"});
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "12px Arial", fill: "000000"});
   cash_text = game.add.text(game.world.centerX-50, 570, "Cash: " + cash, { font: "12px Arial", fill: "000000"});
-  time_text = game.add.text(680, 570, "Time: " + time + " hours", { font: "12px Arial", fill: "000000"});
+  time_text = game.add.text(600, 570, "Time: " + time + " hours", { font: "12px Arial", fill: "000000"});
   home_rent_text = game.add.text(20, 67, "Pay rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
   car_pay_text = game.add.text(20, 97, "Pay car fee: " + car_pay,  { font: "12px Arial", fill: "000000"});
   pet_pay_text = game.add.text(20, 127, "Pay pet fee: " + pet_pay, { font: "12px Arial", fill: "000000"})
@@ -48,7 +48,7 @@ function test() {
 
 function update() {
   var current_time = this.game.time.totalElapsedSeconds();
-  if (old_time + 0.082 < current_time) {
+  if (old_time + 0.0000001 < current_time) {
     old_time = current_time;
   }
   real_time = current_time;
@@ -57,6 +57,10 @@ function update() {
       cash += income;
       cash_text.setText("Cash: " + cash);
       time++;
-      time_text.setText("Time: " + time + " hours");
+      time2 = time % 720;
+      months = Math.floor(time / 720);
+      years = Math.floor(time / 8640)
+      months = months % 13;
+      time_text.setText("Time: " + years + " years  " + months + " months  " + time2 + " hours");
   }
 }
