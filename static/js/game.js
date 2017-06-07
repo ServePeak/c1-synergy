@@ -36,9 +36,9 @@ function create() {
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "12px Arial", fill: "000000"});
   cash_text = game.add.text(360, 570, "Cash: " + cash, { font: "12px Arial", fill: "000000"});
   time_text = game.add.text(600, 570, "Time: " + time + " hours", { font: "12px Arial", fill: "000000"});
-  home_rent_text = game.add.text(20, 67, "Pay rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
-  car_pay_text = game.add.text(20, 97, "Pay car fee: " + car_pay,  { font: "12px Arial", fill: "000000"});
-  pet_pay_text = game.add.text(20, 127, "Pay pet fee: " + pet_pay, { font: "12px Arial", fill: "000000"})
+  home_rent_text = game.add.text(20, 67, "Rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
+  car_pay_text = game.add.text(20, 97, "Car loan: " + car_pay,  { font: "12px Arial", fill: "000000"});
+  pet_pay_text = game.add.text(20, 127, "Pet Food: " + pet_pay, { font: "12px Arial", fill: "000000"})
 }
 
 function test() {
