@@ -48,7 +48,7 @@ function test() {
 
 function update() {
   var current_time = this.game.time.totalElapsedSeconds();
-  if (old_time + 0.0000001 < current_time) {
+  if (old_time + 0.082 < current_time) {
     old_time = current_time;
   }
   real_time = current_time;
