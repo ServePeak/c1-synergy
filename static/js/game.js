@@ -96,7 +96,7 @@ function create() {
   home_text = game.add.text(10, 280, "Home: " + homes[home_level], general_style);
   car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], general_style);
   job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], general_style);
-  upgrade_info = game.add.text(825, 20, "Upgrades", general_style);
+  upgrade_info = game.add.text(820, 20, "Upgrades", general_style);
   lottery_text = game.add.text(780, 210, "Lottery", general_style);
 
   // Pay button text
@@ -111,7 +111,7 @@ function create() {
 
   // Upgrade button hover text
   upgrade_text = game.add.text(0, 0, "", hover_style);
-  upgrade_text.setTextBounds(910, 110, 255, 0);
+  upgrade_text.setTextBounds(760, 110, 200, 0);
   pet_upgrade_button.events.onInputOver.add(petHover, this);
   pet_upgrade_button.events.onInputUp.add(petHover, this);
   pet_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
