@@ -125,16 +125,10 @@ function create() {
   home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 
   // Lottery button hover text
-<<<<<<< HEAD
   lottery_hover_text = game.add.text(748, 290, "", style);
   lottery_button.events.onInputOver.add(lotteryHover, this);
   lottery_button.events.onInputUp.add(lotteryHover, this);
   lottery_button.events.onInputOut.add(upgradeTextOff, this);
-=======
-  //lottery_button.events.onInputOver.add(lotteryHover, this);
-  //lottery_button.events.onInputUp.add(lotteryHover, this);
-  //lottery_button.events.onInputOut.add(upgradeTextOff, this);
->>>>>>> 9337c453f69a15ab4e8b3b030ee787fd9f9a1f63
 }
 
 function payHouse() {
