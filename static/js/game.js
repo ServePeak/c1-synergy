@@ -517,7 +517,6 @@ function update() {
     }
   } else {
     game_over = game.add.sprite(0, 0, 'gameOver');
-    game_over_text = game.add.text(0, 0, "GAME OVER", general_style);
   }
 }
 
