@@ -67,7 +67,7 @@ function create() {
   game.stage.backgroundColor = '#fffff0';
 
   var general_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4" };
-  var button_style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+  var button_style = { font: "16px Arial", fill: "#f0f0f0", boundsAlignH: "center", boundsAlignV: "middle" };
   var hover_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4", boundsAlignH: "center", boundsAlignV: "middle" };
 
   // Background
@@ -77,10 +77,18 @@ function create() {
   main_sprite = game.add.sprite(200, 330, 'adultHuman');
 
   // Pay buttons (left)
-  home_button = game.add.button(10, 60, 'button', payHouse, this, 1, 1, 2);
-  car_button = game.add.button(10, 100, 'button', payCar, this, 1, 1, 2);
-  family_button = game.add.button(10, 140, 'button', payFamily, this, 1, 1, 2);
-  pet_button = game.add.button(10, 180, 'button', payPet, this, 1, 1, 2);
+  home_button = game.add.button(10, 60, 'button', payHouse, this, 0, 0, 0);
+  car_button = game.add.button(10, 100, 'button', payCar, this, 0, 0, 0);
+  family_button = game.add.button(10, 140, 'button', payFamily, this, 0, 0, 0);
+  pet_button = game.add.button(10, 180, 'button', payPet, this, 0, 0, 0);
+  home_button.alpha = 0.5;
+  home_button.inputEnabled = false;
+  car_button.alpha = 0.5;
+  car_button.inputEnabled = false;
+  family_button.alpha = 0.5;
+  family_button.inputEnabled = false;
+  pet_button.alpha = 0.5;
+  pet_button.inputEnabled = false;
 
   // Upgrade buttons (top-right)
   home_upgrade_button = game.add.button(760, 50, 'square', buyHouse, this, 1, 1, 1);
@@ -410,25 +418,33 @@ function update() {
   if (button_time < months) {
     button_time = months;
 
-    home_button.alpha = 1.0;
-    home_button.setFrames(1, 1, 2);
-    home_button.inputEnabled = true;
-    home_rent_text.addColor("#000000", 0);
+    if (home_rent > 0) {
+      home_button.alpha = 1.0;
+      home_button.setFrames(1, 1, 2);
+      home_button.inputEnabled = true;
+      home_rent_text.addColor("#000000", 0);
+    }
 
-    car_button.alpha = 1.0;
-    car_button.setFrames(1, 1, 2);
-    car_button.inputEnabled = true;
-    car_loan_text.addColor("#000000", 0);
+    if (car_loan > 0) {
+      car_button.alpha = 1.0;
+      car_button.setFrames(1, 1, 2);
+      car_button.inputEnabled = true;
+      car_loan_text.addColor("#000000", 0);
+    }
 
-    family_button.alpha = 1.0;
-    family_button.setFrames(1, 1, 2);
-    family_button.inputEnabled = true;
-    family_needs_text.addColor("#000000", 0);
+    if (family_needs > 0) {
+      family_button.alpha = 1.0;
+      family_button.setFrames(1, 1, 2);
+      family_button.inputEnabled = true;
+      family_needs_text.addColor("#000000", 0);
+    }
 
-    pet_button.alpha = 1.0;
-    pet_button.setFrames(1, 1, 2);
-    pet_button.inputEnabled = true;
-    pet_food_text.addColor("#000000", 0);
+    if (pet_food > 0) {
+      pet_button.alpha = 1.0;
+      pet_button.setFrames(1, 1, 2);
+      pet_button.inputEnabled = true;
+      pet_food_text.addColor("#000000", 0);
+    }
   }
 
   // Only earn income for first 8 hours per day
