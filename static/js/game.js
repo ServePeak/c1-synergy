@@ -186,22 +186,32 @@ function buyHouse() {
     home_rent = 600;
     home_type = "Shared Apartment";
     background.loadTexture('sharedApt', 0);
+    credit_score = credit_score + 1;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (home_type == "Shared Apartment") {
     home_rent = 1200;
     home_type = "Single Apartment";
     background.loadTexture('singleApt', 0);
+    credit_score = credit_score + 2;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (home_type == "Single Apartment") {
     home_rent = 2000;
     home_type = "House";
     background.loadTexture('house', 0);
+    credit_score = credit_score + 3;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (home_type == "House") {
     home_rent = 3500;
     home_type = "Vacation Home";
     background.loadTexture('vacationHouse', 0);
+    credit_score = credit_score + 4;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (home_type == "Vacation Home") {
     home_rent = 5000;
     home_type = "Mansion";
     background.loadTexture('mansion', 0);
+    credit_score = credit_score + 5;
+    credit_score_text.setText("Credit Score: " + credit_score);
 
     home_upgrade_button.input.stop();
     home_upgrade_button.destroy();
@@ -221,22 +231,32 @@ function buyCar() {
     car_loan = 0;
     car_type = "Bicycle";
     car_sprite = game.add.sprite(750, 340, 'bicycle');
+    credit_score = credit_score + 1;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (car_type == "Bicycle") {
     car_loan = 50;
     car_type = "Motorcycle";
     car_sprite.loadTexture('motorcycle', 0);
+    credit_score = credit_score + 2;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (car_type == "Motorcycle") {
     car_loan = 150;
     car_type = "Used Car";
     car_sprite.loadTexture('oldCar', 0);
+    credit_score = credit_score + 3;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (car_type == "Used Car") {
     car_loan = 650;
     car_type = "New Car"
     car_sprite.loadTexture('newCar', 0);
+    credit_score = credit_score + 4;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (car_type == "New Car") {
     car_loan = 1300;
     car_type = "Sports Car"
     car_sprite.loadTexture('sportsCar', 0);
+    credit_score = credit_score + 5;
+    credit_score_text.setText("Credit Score: " + credit_score);
     car_upgrade_button.input.stop();
     car_upgrade_button.destroy();
   }
@@ -256,18 +276,26 @@ function buyFamily() {
     family_needs = 1000;
     family_type = "Spouse";
     spouse_sprite = game.add.sprite(250, 330, 'adultHuman');
+    credit_score = credit_score + 1;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (family_type == "Spouse") {
     family_needs = 2000;
     family_type = "Spouse With A Child";
     child1_sprite = game.add.sprite(150, 405, 'childHuman');
+    credit_score = credit_score + 2;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (family_type == "Spouse With A Child") {
     family_needs = 3000;
     family_type = "Spouse With Two Children";
     child2_sprite = game.add.sprite(100, 405, 'childHuman');
+    credit_score = credit_score + 3;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (family_type == "Spouse With Two Children") {
     family_needs = 4000;
     family_type = "Spouse With Three Children";
     child3_sprite = game.add.sprite(50, 405, 'childHuman');
+    credit_score = credit_score + 4;
+    credit_score_text.setText("Credit Score: " + credit_score);
 
     family_upgrade_button.input.stop();
     family_upgrade_button.destroy();
@@ -281,22 +309,32 @@ function buyPet() {
     pet_food = 10;
     pet_type = "Fish";
     pet_sprite = game.add.sprite(600, 400, 'petFish');
+    credit_score = credit_score + 1;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (pet_type == "Fish") {
     pet_food = 30;
     pet_type = "Turtle";
     pet_sprite.loadTexture('petTurtle', 0);
+    credit_score = credit_score + 2;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (pet_type == "Turtle") {
     pet_food = 100;
     pet_type = "Dog";
     pet_sprite.loadTexture('petDog', 0);
+    credit_score = credit_score + 3;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (pet_type == "Dog") {
     pet_food = 150;
     pet_type = "Exotic Cat";
     pet_sprite.loadTexture('petCat', 0);
+    credit_score = credit_score + 4;
+    credit_score_text.setText("Credit Score: " + credit_score);
   } else if (pet_type == "Exotic Cat") {
     pet_food = 500;
     pet_type = "Endangered Tiger";
     pet_sprite.loadTexture('petTiger', 0);
+    credit_score = credit_score + 5;
+    credit_score_text.setText("Credit Score: " + credit_score);
 
     pet_upgrade_button.input.stop();
     pet_upgrade_button.destroy();
