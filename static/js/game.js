@@ -106,9 +106,9 @@ function create() {
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", general_style);
   cash_text = game.add.text(430, 570, "Cash: " + cash, general_style);
   time_text = game.add.text(740, 570, "Time: " + time + " hours", general_style);
-  home_text = game.add.text(10, 280, "Home: " + homes[home_level], general_style);
-  car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], general_style);
-  job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], general_style);
+  home_text = game.add.text(10, 230, "Home: " + homes[home_level], general_style);
+  car_text = game.add.text(10, 250, "Transportation: " + transportation[car_level], general_style);
+  job_text = game.add.text(10, 270, "Job: " + jobs[job_level][0], general_style);
   upgrade_info = game.add.text(840, 20, "Upgrades", general_style);
   lottery_text = game.add.text(910, 450, "Lottery", general_style);
 
