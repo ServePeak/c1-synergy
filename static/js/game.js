@@ -25,9 +25,16 @@ var family_needs = 0;
 var pet_food = 0;
 
 var home_type = "Basement";
+var home_level = 0;
 var car_type = "Shoes";
+var car_level = 0;
+var job_level = 0;
 var family_type = "Single";
 var pet_type = "None";
+
+var homes = ["Basement", "Shared Apartment", "Single Apartment", ""]
+var jobs = ["Freelance Developer", "Junior Software Engineer", "Senior Software Enginner", "Product Manager", "Chief Technology Officer"];
+var transportation = ["Shoes", "Bicycle", "Motorcycle", "Used Car", "New Car", "Sports Car"];
 
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
@@ -65,6 +72,10 @@ function create() {
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "#000000"});
   cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "#000000"});
   time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "#000000"});
+  home_text = game.add.text(10, 280, "Home: " + homes[home_level], { font: "16px Arial", fill: "#000000"});
+  car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], { font: "16px Arial", fill: "#000000"});
+  job_text = game.add.text(10, 320, "Job: " + jobs[job_level], { font: "16px Arial", fill: "#000000"});
+
 
   // Pay button text
   home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, style);
@@ -135,12 +146,17 @@ function buyHouse() {
     home_rent = 2000;
     home_type = "House";
   } else if (home_type == "House") {
+    home_rent = 3500;
+    home_type = "Vacation Home";
+  } else if (home_type == "Vacation Home") {
     home_rent = 5000;
-    home_type = "Mansion";
-
-    house_upgrade_button.input.stop();
-    house_upgrade_button.destroy();
+    home_type = "Mansion"
+    home_upgrade_button.input.stop();
+    home_upgrade_button.destroy();
   }
+  home_level += 1;
+  job_level = Math.min(home_level, car_level, 5);
+  job_text.setText("Job: " + jobs[job_level])
   home_rent_text.setText("Pay Rent: " + home_rent);
 }
 
@@ -160,10 +176,12 @@ function buyCar() {
   } else if (car_type == "New Car") {
     car_loan = 1300;
     car_type = "Sports Car"
-
     car_upgrade_button.input.stop();
     car_upgrade_button.destroy();
   }
+  car_level += 1;
+  job_level = Math.min(home_level, car_level, 5);
+  job_text.setText("Job: " + jobs[job_level])
   car_loan_text.setText("Pay Car Loan: " + car_loan);
 }
 
