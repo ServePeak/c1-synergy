@@ -3,7 +3,7 @@ var config = {
   "height": 600,
   "renderer": Phaser.CANVAS,
   "parent": 'phaser-example',
-  "resolution": window.devicePixelRatio,
+  // "resolution": window.devicePixelRatio, // This changes sizes for every device try not to use
   "state": { "preload": preload, "create": create, "update": update, "render": render }
 };
 
@@ -62,13 +62,13 @@ function create() {
   var style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
 
   // Your character
-  main_sprite = game.add.sprite(400, 320, 'adultHuman');
+  main_sprite = game.add.sprite(200, 330, 'adultHuman');
 
   // Pay buttons (left)
   home_button = game.add.button(10, 60, 'button', payHouse, this, 1, 1, 2);
-  car_button = game.add.button(10, 105, 'button', payCar, this, 1, 1, 2);
-  family_button = game.add.button(10, 150, 'button', payFamily, this, 1, 1, 2);
-  pet_button = game.add.button(10, 195, 'button', payPet, this, 1, 1, 2);
+  car_button = game.add.button(10, 100, 'button', payCar, this, 1, 1, 2);
+  family_button = game.add.button(10, 140, 'button', payFamily, this, 1, 1, 2);
+  pet_button = game.add.button(10, 180, 'button', payPet, this, 1, 1, 2);
 
   // Upgrade buttons (top-right)
   home_upgrade_button = game.add.button(710, 50, 'square', buyHouse, this, 1, 1, 1);
@@ -90,13 +90,13 @@ function create() {
 
   // Pay button text
   home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, style);
-  home_rent_text.setTextBounds(20, 60, 160, 45);
+  home_rent_text.setTextBounds(20, 60, 140, 45);
   car_loan_text = game.add.text(0, 0, "Pay Car Loan: " + car_loan, style);
-  car_loan_text.setTextBounds(20, 105, 160, 45);
+  car_loan_text.setTextBounds(20, 100, 140, 45);
   family_needs_text = game.add.text(0, 0, "Pay Family Needs: " + family_needs, style);
-  family_needs_text.setTextBounds(20, 150, 160, 45);
+  family_needs_text.setTextBounds(20, 140, 140, 45);
   pet_food_text = game.add.text(0, 0, "Pay Pet Food: " + pet_food, style);
-  pet_food_text.setTextBounds(20, 195, 160, 45);
+  pet_food_text.setTextBounds(20, 180, 140, 45);
 
   // Upgrade button hover text
   upgrade_text = game.add.text(0, 0, "", style);
@@ -192,7 +192,7 @@ function buyCar() {
   if (car_type == "Shoes") {
     car_loan = 0;
     car_type = "Bicycle";
-    car_sprite = game.add.sprite(700, 400, 'bicycle');
+    car_sprite = game.add.sprite(750, 340, 'bicycle');
   } else if (car_type == "Bicycle") {
     car_loan = 50;
     car_type = "Motorcycle";
@@ -226,15 +226,19 @@ function buyFamily() {
   if (family_type == "Single") {
     family_needs = 1000;
     family_type = "Married";
+    spouse_sprite = game.add.sprite(250, 330, 'adultHuman');
   } else if (family_type == "Married") {
     family_needs = 2000;
     family_type = "Married With A Child";
+    child1_sprite = game.add.sprite(150, 405, 'childHuman');
   } else if (family_type == "Married With A Child") {
     family_needs = 3000;
     family_type = "Married With Two Children";
+    child2_sprite = game.add.sprite(100, 405, 'childHuman');
   } else if (family_type == "Married With Two Children") {
     family_needs = 4000;
     family_type = "Married With Three Children";
+    child3_sprite = game.add.sprite(50, 405, 'childHuman');
 
     family_upgrade_button.input.stop();
     family_upgrade_button.destroy();
@@ -371,6 +375,9 @@ function update() {
   }
 
   // Enable buttons again on new month
+  if (months == 0) {
+    button_Time = -1;
+  }
   if (button_time < months) {
     button_time = months;
 
@@ -396,6 +403,9 @@ function update() {
   }
 
   // Only earn income for first 8 hours per day
+  if (hours == 0) {
+    income_time = 0;
+  }
   if (income_time + 8 >= hours) {
     cash += income;
     cash_text.setText("Cash: " + cash);
