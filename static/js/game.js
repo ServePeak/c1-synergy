@@ -4,7 +4,7 @@ var config = {
   "renderer": Phaser.CANVAS,
   "parent": 'phaser-example',
   "resolution": window.devicePixelRatio,
-  "state": { "preload": preload, "create": create, "update": update }
+  "state": { "preload": preload, "create": create, "update": update, "render": render }
 };
 
 var game = new Phaser.Game(config);
@@ -44,18 +44,16 @@ function create() {
 
   game.stage.backgroundColor = '#fffff0';
   
-  var style = { font: "16px Arial", fill: "000000", boundsAlignH: "center", boundsAlignV: "middle" };
+  var style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
 
   // Pay buttons (left)
-  rent_button = game.add.button(10, 60, 'button', payHouse, this, 0, 0, 2);
-  car_button = game.add.button(10, 100, 'button', payCar, this, 0, 0, 2);
-  family_button = game.add.button(10, 140, 'button', payFamily, this, 0, 0, 2);
-  pet_button = game.add.button(10, 180, 'button', payPet, this, 0, 0, 2);
-  
-  pet_button.inputEnabled = true;
+  home_button = game.add.button(10, 60, 'button', payHouse, this, 1, 1, 2);
+  car_button = game.add.button(10, 105, 'button', payCar, this, 1, 1, 2);
+  family_button = game.add.button(10, 150, 'button', payFamily, this, 1, 1, 2);
+  pet_button = game.add.button(10, 195, 'button', payPet, this, 1, 1, 2);
 
   // Upgrade buttons (top-right)
-  house_upgrade_button = game.add.button(710, 30, 'square', buyHouse, this, 1, 1, 1);
+  home_upgrade_button = game.add.button(710, 30, 'square', buyHouse, this, 1, 1, 1);
   car_upgrade_button = game.add.button(760, 30, 'square', buyCar, this, 1, 1, 1);
   family_upgrade_button = game.add.button(810, 30, 'square', buyFamily, this, 1, 1, 1);
   pet_upgrade_button = game.add.button(860, 30, 'square', buyPet, this, 1, 1, 1);
@@ -63,19 +61,19 @@ function create() {
 
   // The various text that the user needs to know
   credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "16px Arial", fill: "000000"});
-  income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "000000"});
-  cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "000000"});
-  time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "000000"});
+  income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "#000000"});
+  cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "#000000"});
+  time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "#000000"});
 
   // Pay button text
   home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, style);
   home_rent_text.setTextBounds(20, 60, 160, 45);
   car_loan_text = game.add.text(0, 0, "Pay Car Loan: " + car_loan, style);
-  car_loan_text.setTextBounds(20, 100, 160, 45);
+  car_loan_text.setTextBounds(20, 105, 160, 45);
   family_needs_text = game.add.text(0, 0, "Pay Family Needs: " + family_needs, style);
-  family_needs_text.setTextBounds(20, 140, 160, 45);
+  family_needs_text.setTextBounds(20, 150, 160, 45);
   pet_food_text = game.add.text(0, 0, "Pay Pet Food: " + pet_food, style);
-  pet_food_text.setTextBounds(20, 180, 160, 45);
+  pet_food_text.setTextBounds(20, 195, 160, 45);
 
   // Upgrade button hover text
   upgrade_text = game.add.text(0, 0, "", style);
@@ -88,21 +86,41 @@ function create() {
 function payHouse() {
   cash -= home_rent;
   cash_text.setText("Cash: " + cash);
+  
+  home_button.alpha = 0.5;
+  home_button.setFrames(0,0,0);
+  home_button.inputEnabled = false;
+  home_rent_text.addColor("#f0f0f0", 0);
 }
 
 function payCar() {
   cash -= car_loan;
   cash_text.setText("Cash: " + cash);
+  
+  car_button.alpha = 0.5;
+  car_button.setFrames(0,0,0);
+  car_button.inputEnabled = false;
+  car_loan_text.addColor("#f0f0f0", 0);
 }
 
 function payFamily() {
   cash -= family_needs;
   cash_text.setText("Cash: " + cash);
+  
+  family_button.alpha = 0.5;
+  family_button.setFrames(0,0,0);
+  family_button.inputEnabled = false;
+  family_needs_text.addColor("#f0f0f0", 0);
 }
 
 function payPet() {
   cash -= pet_food;
   cash_text.setText("Cash: " + cash);
+  
+  pet_button.alpha = 0.5;
+  pet_button.setFrames(0,0,0);
+  pet_button.inputEnabled = false;
+  pet_food_text.addColor("#f0f0f0", 0);
 }
 
 function buyHouse() {
@@ -265,4 +283,8 @@ function update() {
   } else if (income_time + 24 < hours) {
       income_time = hours;
   }
+}
+
+function render() {
+    
 }
