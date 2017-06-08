@@ -10,11 +10,12 @@ var config = {
 var game = new Phaser.Game(config);
 
 var credit_score = 600;
-var income = 1;
+var income = 8;
 var cash = 0;
 
 var old_time = 0;
 var real_time = 0;
+var income_time = 0;
 var time = 0;
 
 var home_rent = 0;
@@ -38,26 +39,30 @@ function create() {
 
   game.stage.backgroundColor = '#fffff0';
 
+  // Pay buttons (left)
   rent_button = game.add.button(10, 60, 'button', payHouse, this, 0, 0, 2);
-  car_button = game.add.button(10, 90, 'button', payCar, this, 0, 0, 2);
-  family_button = game.add.button(10, 120, 'button', payFamily, this, 0, 0, 2);
-  pet_button = game.add.button(10, 150, 'button', payPet, this, 0, 0, 2);
+  car_button = game.add.button(10, 100, 'button', payCar, this, 0, 0, 2);
+  family_button = game.add.button(10, 140, 'button', payFamily, this, 0, 0, 2);
+  pet_button = game.add.button(10, 180, 'button', payPet, this, 0, 0, 2);
 
+  // Upgrade buttons (top-right)
   house_upgrade_button = game.add.button(710, 30, 'square', buyHouse, this, 1, 1, 1);
   car_upgrade_button = game.add.button(760, 30, 'square', buyCar, this, 1, 1, 1);
   family_upgrade_button = game.add.button(810, 30, 'square', buyFamily, this, 1, 1, 1);
   pet_upgrade_button = game.add.button(860, 30, 'square', buyPet, this, 1, 1, 1);
   lottery_upgrade_button = game.add.button(910, 30, 'square', buyLottery, this, 1, 1, 1);
 
+  // The various text that the user needs to know
   credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "16px Arial", fill: "000000"});
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "000000"});
   cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "000000"});
   time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "000000"});
 
-  home_rent_text = game.add.text(20, 67, "Pay Rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
-  car_loan_text = game.add.text(20, 97, "Pay Car Loan: " + car_loan,  { font: "12px Arial", fill: "000000"});
-  family_needs_text = game.add.text(20, 127, "Pay Family Needs: " + family_needs, { font: "12px Arial", fill: "000000"});
-  pet_food_text = game.add.text(20, 157, "Pay Pet Food: " + pet_food, { font: "12px Arial", fill: "000000"});
+  // Pay button text
+  home_rent_text = game.add.text(20, 75, "Pay Rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
+  car_loan_text = game.add.text(20, 115, "Pay Car Loan: " + car_loan,  { font: "12px Arial", fill: "000000"});
+  family_needs_text = game.add.text(20, 155, "Pay Family Needs: " + family_needs, { font: "12px Arial", fill: "000000"});
+  pet_food_text = game.add.text(20, 195, "Pay Pet Food: " + pet_food, { font: "12px Arial", fill: "000000"});
 }
 
 function payHouse() {
@@ -134,7 +139,7 @@ function buyFamily() {
 function buyPet() {
   if (pet_food == 0) {
     pet_food = 300;
-    pet_sprite = game.add.sprite(200, 200, 'petFish');
+    pet_sprite = game.add.sprite(600, 400, 'petFish');
   } else if (pet_food == 300) {
     pet_food = 600;
     pet_sprite.loadTexture('petTurtle', 0);
@@ -178,19 +183,29 @@ function buyLottery() {
 
 function update() {
   var current_time = this.game.time.totalElapsedSeconds();
+  var hours;
+  
+  // 0.082 to convert 1 month in hours to a minute
   if (old_time + 0.082 < current_time) {
     old_time = current_time;
   }
   real_time = current_time;
 
+  // Time display values
   if (old_time == real_time) {
-      cash += income;
-      cash_text.setText("Cash: " + cash);
       time++;
-      time2 = time % 720;
+      hours = time % 720;
       months = Math.floor(time / 720);
       years = Math.floor(time / 8640)
       months = months % 13;
-      time_text.setText("Time: " + years + " years " + months + " months " + time2 + " hours");
+      time_text.setText("Time: " + years + " years " + months + " months " + hours + " hours");
+  }
+  
+  // Only earn income for first 8 hours per day
+  if (income_time + 8 >= hours) {
+      cash += income;
+      cash_text.setText("Cash: " + cash);
+  } else if (income_time + 24 < hours) {
+      income_time = hours;
   }
 }
