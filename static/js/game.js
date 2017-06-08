@@ -67,6 +67,7 @@ function create() {
 
   var general_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4" };
   var button_style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+  var hover_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4", boundsAlignH: "center", boundsAlignV: "middle" };
 
   // Background
   background = game.add.sprite(0, 0, 'basement');
@@ -109,7 +110,7 @@ function create() {
   pet_food_text.setTextBounds(20, 180, 140, 45);
 
   // Upgrade button hover text
-  upgrade_text = game.add.text(0, 0, "", style);
+  upgrade_text = game.add.text(0, 0, "", hover_style);
   upgrade_text.setTextBounds(680, 110, 255, 0);
   pet_upgrade_button.events.onInputOver.add(petHover, this);
   pet_upgrade_button.events.onInputUp.add(petHover, this);
@@ -125,7 +126,7 @@ function create() {
   home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 
   // Lottery button hover text
-  lottery_hover_text = game.add.text(748, 290, "", style);
+  lottery_hover_text = game.add.text(748, 290, "", hover_style);
   lottery_button.events.onInputOver.add(lotteryHover, this);
   lottery_button.events.onInputUp.add(lotteryHover, this);
   lottery_button.events.onInputOut.add(upgradeTextOff, this);
