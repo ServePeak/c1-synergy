@@ -44,7 +44,7 @@ function preload() {
   game.load.image('basement', 'static/images/basement.png');
   game.load.image('sharedApt', 'static/images/apartment.png');
   game.load.image('singleApt', 'static/images/singleapartment.png');
-  game.load.image('House', 'static/images/house.png');
+  game.load.image('house', 'static/images/house.png');
   game.load.image('vacationHouse', 'static/images/vacationhouse.png');
   game.load.image('mansion', 'static/images/mansion.png');
   game.load.image('bicycle', 'static/images/bicycle.png');
@@ -62,6 +62,7 @@ function preload() {
 }
 
 function create() {
+  game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
   game.stage.backgroundColor = '#fffff0';
 
@@ -184,12 +185,16 @@ function buyHouse() {
   } else if (home_type == "Single Apartment") {
     home_rent = 2000;
     home_type = "House";
+    background.loadTexture('house', 0);
   } else if (home_type == "House") {
     home_rent = 3500;
     home_type = "Vacation Home";
+    background.loadTexture('vacationHouse', 0);
   } else if (home_type == "Vacation Home") {
     home_rent = 5000;
     home_type = "Mansion";
+    background.loadTexture('mansion', 0);
+
     home_upgrade_button.input.stop();
     home_upgrade_button.destroy();
   }
@@ -200,6 +205,7 @@ function buyHouse() {
   income_text.setText("Income: " + income + "/hr");
   home_text.setText("Home: " + homes[home_level]);
   home_rent_text.setText("Pay Rent: " + home_rent);
+  upgrade_text.setText("");
 }
 
 function buyCar() {
@@ -233,6 +239,7 @@ function buyCar() {
   income_text.setText("Income: " + income + "/hr");
   car_text.setText("Transportation: " + transportation[car_level]);
   car_loan_text.setText("Pay Car Loan: " + car_loan);
+  upgrade_text.setText("");
 }
 
 // TODO: More accurate price for a family of X
@@ -258,6 +265,7 @@ function buyFamily() {
     family_upgrade_button.destroy();
   }
   family_needs_text.setText("Pay Family Needs: " + family_needs);
+  upgrade_text.setText("");
 }
 
 function buyPet() {
@@ -286,6 +294,7 @@ function buyPet() {
     pet_upgrade_button.destroy();
   }
   pet_food_text.setText("Pay Pet Food: " + pet_food);
+  upgrade_text.setText("");
 }
 
 // TODO: Accurate lottery chances with random jackpot
