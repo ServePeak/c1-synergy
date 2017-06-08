@@ -283,6 +283,7 @@ function homeHover() {
   } else if (home_type == "Single Apartment") {
     upgrade_text.setText("House")
   } else if (home_type == "House") {
+    upgrade_text.setText("Mansion");
   }
 }
 
