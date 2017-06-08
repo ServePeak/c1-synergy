@@ -23,6 +23,11 @@ var car_loan = 0;
 var family_needs = 0;
 var pet_food = 0;
 
+var home_type = "Basement";
+var car_type = "Shoes";
+var family_type = "Single";
+var pet_type = "None";
+
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
   game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
@@ -38,12 +43,16 @@ function preload() {
 function create() {
 
   game.stage.backgroundColor = '#fffff0';
+  
+  var style = { font: "16px Arial", fill: "000000", boundsAlignH: "center", boundsAlignV: "middle" };
 
   // Pay buttons (left)
   rent_button = game.add.button(10, 60, 'button', payHouse, this, 0, 0, 2);
   car_button = game.add.button(10, 100, 'button', payCar, this, 0, 0, 2);
   family_button = game.add.button(10, 140, 'button', payFamily, this, 0, 0, 2);
   pet_button = game.add.button(10, 180, 'button', payPet, this, 0, 0, 2);
+  
+  pet_button.inputEnabled = true;
 
   // Upgrade buttons (top-right)
   house_upgrade_button = game.add.button(710, 30, 'square', buyHouse, this, 1, 1, 1);
@@ -59,10 +68,21 @@ function create() {
   time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "000000"});
 
   // Pay button text
-  home_rent_text = game.add.text(20, 75, "Pay Rent: " + home_rent,  { font: "12px Arial", fill: "000000"});
-  car_loan_text = game.add.text(20, 115, "Pay Car Loan: " + car_loan,  { font: "12px Arial", fill: "000000"});
-  family_needs_text = game.add.text(20, 155, "Pay Family Needs: " + family_needs, { font: "12px Arial", fill: "000000"});
-  pet_food_text = game.add.text(20, 195, "Pay Pet Food: " + pet_food, { font: "12px Arial", fill: "000000"});
+  home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, style);
+  home_rent_text.setTextBounds(20, 60, 160, 45);
+  car_loan_text = game.add.text(0, 0, "Pay Car Loan: " + car_loan, style);
+  car_loan_text.setTextBounds(20, 100, 160, 45);
+  family_needs_text = game.add.text(0, 0, "Pay Family Needs: " + family_needs, style);
+  family_needs_text.setTextBounds(20, 140, 160, 45);
+  pet_food_text = game.add.text(0, 0, "Pay Pet Food: " + pet_food, style);
+  pet_food_text.setTextBounds(20, 180, 160, 45);
+
+  // Upgrade button hover text
+  upgrade_text = game.add.text(0, 0, "", style);
+  upgrade_text.setTextBounds(710, 95, 255, 0);
+  pet_upgrade_button.events.onInputOver.add(petHover, this);
+  pet_upgrade_button.events.onInputUp.add(petHover, this);
+  pet_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 }
 
 function payHouse() {
@@ -86,14 +106,18 @@ function payPet() {
 }
 
 function buyHouse() {
-  if (home_rent == 0) {
+  if (home_type == "Basement") {
     home_rent = 600;
-  } else if (home_rent == 600) {
+    home_type = "Shared Apartment";
+  } else if (home_type == "Shared Apartment") {
     home_rent = 1200;
-  } else if (home_rent == 1200) {
+    home_type = "Single Apartment";
+  } else if (home_type == "Single Apartment") {
     home_rent = 2000;
-  } else if (home_rent == 2000) {
+    home_type = "House";
+  } else if (home_type == "House") {
     home_rent = 5000;
+    home_type = "Mansion";
 
     house_upgrade_button.input.stop();
     house_upgrade_button.destroy();
@@ -101,16 +125,22 @@ function buyHouse() {
   home_rent_text.setText("Pay Rent: " + home_rent);
 }
 
-// TODO: More accurate car prices/loans
 function buyCar() {
-  if (car_loan == 0) {
-    car_loan = 600;
-  } else if (car_loan == 600) {
-    car_loan = 1200;
-  } else if (car_loan == 1200) {
-    car_loan = 2000;
-  } else if (car_loan == 2000) {
-    car_loan = 5000;
+  if (car_type == "Shoes") {
+    car_loan = 0;
+    car_type = "Bicycle";
+  } else if (car_type == "Bicycle") {
+    car_loan = 50;
+    car_type = "Motorcycle";
+  } else if (car_type == "Motorcycle") {
+    car_loan = 150;
+    car_type = "Used Car";
+  } else if (car_type == "Used Car") {
+    car_loan = 650;
+    car_type = "New Car"
+  } else if (car_type == "New Car") {
+    car_loan = 1300;
+    car_type = "Sports Car"
 
     car_upgrade_button.input.stop();
     car_upgrade_button.destroy();
@@ -120,14 +150,18 @@ function buyCar() {
 
 // TODO: More accurate price for a family of X
 function buyFamily() {
-  if (family_needs == 0) {
-    family_needs = 600;
-  } else if (family_needs == 600) {
-    family_needs = 1200;
-  } else if (family_needs == 1200) {
+  if (family_type == "Single") {
+    family_needs = 1000;
+    family_type = "Married";
+  } else if (family_type == "Married") {
     family_needs = 2000;
-  } else if (family_needs == 2000) {
-    family_needs = 5000;
+    family_type = "Married With A Child";
+  } else if (family_type == "Married With A Child") {
+    family_needs = 3000;
+    family_type = "Married With Two Children";
+  } else if (family_type == "Married With Two Children") {
+    family_needs = 4000;
+    family_type = "Married With Three Children";
     
     family_upgrade_button.input.stop();
     family_upgrade_button.destroy();
@@ -135,26 +169,31 @@ function buyFamily() {
   family_needs_text.setText("Pay Family Needs: " + family_needs);
 }
 
-// TODO: More accurate pet food prices
 function buyPet() {
-  if (pet_food == 0) {
-    pet_food = 300;
+  if (pet_type == "None") {
+    pet_food = 10;
+    pet_type = "Fish";
     pet_sprite = game.add.sprite(600, 400, 'petFish');
-  } else if (pet_food == 300) {
-    pet_food = 600;
+  } else if (pet_type == "Fish") {
+    pet_food = 30;
+    pet_type = "Turtle";
     pet_sprite.loadTexture('petTurtle', 0);
-  } else if (pet_food == 600) {
-    pet_food = 900;
+  } else if (pet_type == "Turtle") {
+    pet_food = 100;
+    pet_type = "Dog";
     pet_sprite.loadTexture('petDog', 0);
-  } else if (pet_food == 900) {
-    pet_food = 1200;
+  } else if (pet_type == "Dog") {
+    pet_food = 150;
+    pet_type = "Exotic Cat";
     pet_sprite.loadTexture('petCat', 0);
-  } else if (pet_food == 1200) {
-    pet_food = 1500;
+  } else if (pet_type == "Exotic Cat") {
+    pet_food = 500;
+    pet_type = "Endangered Tiger";
     pet_sprite.loadTexture('petTiger', 0);
 
     pet_upgrade_button.input.stop();
     pet_upgrade_button.destroy();
+    upgrade_text.setText("");
   }
   pet_food_text.setText("Pay Pet Food: " + pet_food);
 }
@@ -179,6 +218,24 @@ function buyLottery() {
       break;
     }
   }
+}
+
+function upgradeTextOff() {
+    upgrade_text.setText("");
+}
+
+function petHover() {
+    if (pet_type == "None") {
+        upgrade_text.setText("Fish");
+    } else if (pet_type == "Fish") {
+        upgrade_text.setText("Turtle");
+    } else if (pet_type == "Turtle") {
+        upgrade_text.setText("Dog")
+    } else if (pet_type == "Dog") {
+        upgrade_text.setText("Exotic Cat");
+    } else if (pet_type == "Exotic Cat") {
+        upgrade_text.setText("Endangered Tiger");
+    }
 }
 
 function update() {
