@@ -32,6 +32,8 @@ var pet_type = "None";
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
   game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
+  game.load.image('adultHuman', 'static/images/defaultperson.png');
+  game.load.image('childHuman', 'static/images/child.png');
   game.load.image('petFish', 'static/images/fish.png');
   game.load.image('petTurtle', 'static/images/turtle.png');
   game.load.image('petDog', 'static/images/dog.png');
@@ -46,6 +48,9 @@ function create() {
   game.stage.backgroundColor = '#fffff0';
   
   var style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+  
+  // Your character
+  main_sprite = game.add.sprite(400, 320, 'adultHuman');
 
   // Pay buttons (left)
   home_button = game.add.button(10, 60, 'button', payHouse, this, 1, 1, 2);
@@ -82,6 +87,15 @@ function create() {
   pet_upgrade_button.events.onInputOver.add(petHover, this);
   pet_upgrade_button.events.onInputUp.add(petHover, this);
   pet_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
+  family_upgrade_button.events.onInputOver.add(familyHover, this);
+  family_upgrade_button.events.onInputUp.add(familyHover, this);
+  family_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
+  car_upgrade_button.events.onInputOver.add(carHover, this);
+  car_upgrade_button.events.onInputUp.add(carHover, this);
+  car_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
+  home_upgrade_button.events.onInputOver.add(homeHover, this);
+  home_upgrade_button.events.onInputUp.add(homeHover, this);
+  home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 }
 
 function payHouse() {
@@ -138,8 +152,8 @@ function buyHouse() {
     home_rent = 5000;
     home_type = "Mansion";
 
-    house_upgrade_button.input.stop();
-    house_upgrade_button.destroy();
+    home_upgrade_button.input.stop();
+    home_upgrade_button.destroy();
   }
   home_rent_text.setText("Pay Rent: " + home_rent);
 }
@@ -241,6 +255,42 @@ function buyLottery() {
 
 function upgradeTextOff() {
     upgrade_text.setText("");
+}
+
+function homeHover() {
+  if (home_type == "Basement") {
+    upgrade_text.setText("Shared Apartment");
+  } else if (home_type == "Shared Apartment") {
+    upgrade_text.setText("Single Apartment");
+  } else if (home_type == "Single Apartment") {
+    upgrade_text.setText("House")
+  } else if (home_type == "House") {
+    upgrade_text.setText("Mansion");
+  }
+}
+
+function carHover() {
+  if (car_type == "Shoes") {
+    upgrade_text.setText("Bicycle");
+  } else if (car_type == "Bicycle") {
+    upgrade_text.setText("Used Car");
+  } else if (car_type == "Used Car") {
+    upgrade_text.setText("New Car")
+  } else if (car_type == "New Car") {
+    upgrade_text.setText("Sports Car");
+  }
+}
+
+function familyHover() {
+  if (family_type == "Single") {
+    upgrade_text.setText("Spouse");
+  } else if (family_type == "Spouse") {
+    upgrade_text.setText("Spouse With A Child");
+  } else if (family_type == "Spouse With A Child") {
+    upgrade_text.setText("Spouse With Two Children")
+  } else if (family_type == "Spouse With Two Children") {
+    upgrade_text.setText("Spouse With Three Children");
+  }
 }
 
 function petHover() {
