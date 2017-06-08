@@ -32,8 +32,8 @@ var job_level = 0;
 var family_type = "Single";
 var pet_type = "None";
 
-var homes = ["Basement", "Shared Apartment", "Single Apartment", ""]
-var jobs = ["Freelance Developer", "Junior Software Engineer", "Senior Software Enginner", "Product Manager", "Chief Technology Officer"];
+var homes = ["Basement", "Shared Apartment", "Single Apartment", "House", "Vacation Home", "Mansion"];
+var jobs = [["Freelance Developer", 8], ["Junior Software Engineer", 15], ["Senior Software Enginner", 30], ["Principal Software Engineer", 60], ["Product Manager", 80], ["Chief Technology Officer", 120]];
 var transportation = ["Shoes", "Bicycle", "Motorcycle", "Used Car", "New Car", "Sports Car"];
 
 function preload() {
@@ -79,7 +79,7 @@ function create() {
   time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "#000000"});
   home_text = game.add.text(10, 280, "Home: " + homes[home_level], { font: "16px Arial", fill: "#000000"});
   car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], { font: "16px Arial", fill: "#000000"});
-  job_text = game.add.text(10, 320, "Job: " + jobs[job_level], { font: "16px Arial", fill: "#000000"});
+  job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], { font: "16px Arial", fill: "#000000"});
 
 
   // Pay button text
@@ -170,7 +170,10 @@ function buyHouse() {
   }
   home_level += 1;
   job_level = Math.min(home_level, car_level, 5);
-  job_text.setText("Job: " + jobs[job_level])
+  job_text.setText("Job: " + jobs[job_level][0]);
+  income = jobs[job_level][1];
+  income_text.setText("Income: " + income + "/hr");
+  home_text.setText("Home: " + homes[home_level]);
   home_rent_text.setText("Pay Rent: " + home_rent);
 }
 
@@ -195,7 +198,10 @@ function buyCar() {
   }
   car_level += 1;
   job_level = Math.min(home_level, car_level, 5);
-  job_text.setText("Job: " + jobs[job_level])
+  job_text.setText("Job: " + jobs[job_level][0]);
+  income = jobs[job_level][1];
+  income_text.setText("Income: " + income + "/hr");
+  car_text.setText("Transportation: " + transportation[car_level]);
   car_loan_text.setText("Pay Car Loan: " + car_loan);
 }
 
