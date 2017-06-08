@@ -405,6 +405,11 @@ function update() {
   if (old_time == real_time) {
     time++;
     hours = time % 720;
+    //At the end of the month if the player's cash is negative decrease their credit score
+    if (hours / 719 == 0 && cash < 0) {
+      credit_score -= 25;
+      credit_score_text.setText("Credit Score: " + credit_score);
+    }
     months = Math.floor(time / 720);
     years = Math.floor(time / 8640)
     months = months % 13;
