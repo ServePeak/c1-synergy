@@ -115,7 +115,7 @@ function create() {
   home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 
   // Lottery button hover text
-  lottery_hover_text = game.add.text(732, 290, "", style);
+  lottery_hover_text = game.add.text(748, 290, "", style);
   lottery_button.events.onInputOver.add(lotteryHover, this);
   lottery_button.events.onInputUp.add(lotteryHover, this);
   lottery_button.events.onInputOut.add(upgradeTextOff, this);
@@ -356,7 +356,7 @@ function petHover() {
 }
 
 function lotteryHover() {
-  lottery_hover_text.setText("Buy 100 lottery tickets");
+  lottery_hover_text.setText("Buy lottery tickets");
 }
 
 function update() {
