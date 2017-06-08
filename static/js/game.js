@@ -82,10 +82,10 @@ function create() {
   pet_button = game.add.button(10, 180, 'button', payPet, this, 1, 1, 2);
 
   // Upgrade buttons (top-right)
-  home_upgrade_button = game.add.button(710, 50, 'square', buyHouse, this, 1, 1, 1);
-  car_upgrade_button = game.add.button(760, 50, 'square', buyCar, this, 1, 1, 1);
-  family_upgrade_button = game.add.button(810, 50, 'square', buyFamily, this, 1, 1, 1);
-  pet_upgrade_button = game.add.button(860, 50, 'square', buyPet, this, 1, 1, 1);
+  home_upgrade_button = game.add.button(760, 50, 'square', buyHouse, this, 1, 1, 1);
+  car_upgrade_button = game.add.button(810, 50, 'square', buyCar, this, 1, 1, 1);
+  family_upgrade_button = game.add.button(860, 50, 'square', buyFamily, this, 1, 1, 1);
+  pet_upgrade_button = game.add.button(910, 50, 'square', buyPet, this, 1, 1, 1);
   lottery_button = game.add.button(785, 230, 'square', buyLottery, this, 1, 1, 1);
 
   // The various text that the user needs to know
@@ -96,7 +96,7 @@ function create() {
   home_text = game.add.text(10, 280, "Home: " + homes[home_level], general_style);
   car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], general_style);
   job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], general_style);
-  upgrade_info = game.add.text(775, 20, "Upgrades", general_style);
+  upgrade_info = game.add.text(825, 20, "Upgrades", general_style);
   lottery_text = game.add.text(780, 210, "Lottery", general_style);
 
   // Pay button text
@@ -111,7 +111,7 @@ function create() {
 
   // Upgrade button hover text
   upgrade_text = game.add.text(0, 0, "", hover_style);
-  upgrade_text.setTextBounds(680, 110, 255, 0);
+  upgrade_text.setTextBounds(910, 110, 255, 0);
   pet_upgrade_button.events.onInputOver.add(petHover, this);
   pet_upgrade_button.events.onInputUp.add(petHover, this);
   pet_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
@@ -239,19 +239,19 @@ function buyCar() {
 function buyFamily() {
   if (family_type == "Single") {
     family_needs = 1000;
-    family_type = "Married";
+    family_type = "Spouse";
     spouse_sprite = game.add.sprite(250, 330, 'adultHuman');
-  } else if (family_type == "Married") {
+  } else if (family_type == "Spouse") {
     family_needs = 2000;
-    family_type = "Married With A Child";
+    family_type = "Spouse With A Child";
     child1_sprite = game.add.sprite(150, 405, 'childHuman');
-  } else if (family_type == "Married With A Child") {
+  } else if (family_type == "Spouse With A Child") {
     family_needs = 3000;
-    family_type = "Married With Two Children";
+    family_type = "Spouse With Two Children";
     child2_sprite = game.add.sprite(100, 405, 'childHuman');
-  } else if (family_type == "Married With Two Children") {
+  } else if (family_type == "Spouse With Two Children") {
     family_needs = 4000;
-    family_type = "Married With Three Children";
+    family_type = "Spouse With Three Children";
     child3_sprite = game.add.sprite(50, 405, 'childHuman');
 
     family_upgrade_button.input.stop();
@@ -321,7 +321,7 @@ function homeHover() {
   } else if (home_type == "Shared Apartment") {
     upgrade_text.setText("Single Apartment");
   } else if (home_type == "Single Apartment") {
-    upgrade_text.setText("House")
+    upgrade_text.setText("House");
   } else if (home_type == "House") {
     upgrade_text.setText("Vacation Home");
   } else if (home_type == "Vacation Home") {
@@ -337,7 +337,7 @@ function carHover() {
   } else if (car_type == "Motorcycle") {
     upgrade_text.setText("Used Car");
   } else if (car_type == "Used Car") {
-    upgrade_text.setText("New Car")
+    upgrade_text.setText("New Car");
   } else if (car_type == "New Car") {
     upgrade_text.setText("Sports Car");
   }
@@ -349,7 +349,7 @@ function familyHover() {
   } else if (family_type == "Spouse") {
     upgrade_text.setText("Spouse With A Child");
   } else if (family_type == "Spouse With A Child") {
-    upgrade_text.setText("Spouse With Two Children")
+    upgrade_text.setText("Spouse With Two Children");
   } else if (family_type == "Spouse With Two Children") {
     upgrade_text.setText("Spouse With Three Children");
   }
@@ -361,7 +361,7 @@ function petHover() {
   } else if (pet_type == "Fish") {
     upgrade_text.setText("Turtle");
   } else if (pet_type == "Turtle") {
-    upgrade_text.setText("Dog")
+    upgrade_text.setText("Dog");
   } else if (pet_type == "Dog") {
     upgrade_text.setText("Exotic Cat");
   } else if (pet_type == "Exotic Cat") {
