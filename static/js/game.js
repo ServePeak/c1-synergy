@@ -41,6 +41,12 @@ function preload() {
   game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
   game.load.image('adultHuman', 'static/images/defaultperson.png');
   game.load.image('childHuman', 'static/images/child.png');
+  game.load.image('basement', 'static/images/basement.png');
+  game.load.image('sharedApt', 'static/images/apartment.png');
+  game.load.image('singleApt', 'static/images/singleapartment.png');
+  game.load.image('House', 'static/images/house.png');
+  game.load.image('vacationHouse', 'static/images/vacationhouse.png');
+  game.load.image('mansion', 'static/images/mansion.png');
   game.load.image('bicycle', 'static/images/bicycle.png');
   game.load.image('motorcycle', 'static/images/motorcycle.png');
   game.load.image('oldCar', 'static/images/oldcar.png');
@@ -59,7 +65,11 @@ function create() {
 
   game.stage.backgroundColor = '#fffff0';
 
-  var style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+  var general_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4" };
+  var button_style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+  // Background
+  background = game.add.sprite(0, 0, 'basement');
 
   // Your character
   main_sprite = game.add.sprite(200, 330, 'adultHuman');
@@ -78,24 +88,24 @@ function create() {
   lottery_button = game.add.button(785, 230, 'square', buyLottery, this, 1, 1, 1);
 
   // The various text that the user needs to know
-  credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "16px Arial", fill: "000000"});
-  income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "#000000"});
-  cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "#000000"});
-  time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "#000000"});
-  home_text = game.add.text(10, 280, "Home: " + homes[home_level], { font: "16px Arial", fill: "#000000"});
-  car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], { font: "16px Arial", fill: "#000000"});
-  job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], { font: "16px Arial", fill: "#000000"});
-  upgrade_info = game.add.text(770, 20, "Upgrades", { font: "16px Arial", fill: "#000000"});
-  lottery_text = game.add.text(785, 210, "Lottery", { font: "16px Arial", fill: "#000000"});
+  credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, general_style);
+  income_text = game.add.text(10, 570, "Income: " + income + "/hr", general_style);
+  cash_text = game.add.text(430, 570, "Cash: " + cash, general_style);
+  time_text = game.add.text(740, 570, "Time: " + time + " hours", general_style);
+  home_text = game.add.text(10, 280, "Home: " + homes[home_level], general_style);
+  car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], general_style);
+  job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], general_style);
+  upgrade_info = game.add.text(775, 20, "Upgrades", general_style);
+  lottery_text = game.add.text(780, 210, "Lottery", general_style);
 
   // Pay button text
-  home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, style);
+  home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, button_style);
   home_rent_text.setTextBounds(20, 60, 140, 45);
-  car_loan_text = game.add.text(0, 0, "Pay Car Loan: " + car_loan, style);
+  car_loan_text = game.add.text(0, 0, "Pay Car Loan: " + car_loan, button_style);
   car_loan_text.setTextBounds(20, 100, 140, 45);
-  family_needs_text = game.add.text(0, 0, "Pay Family Needs: " + family_needs, style);
+  family_needs_text = game.add.text(0, 0, "Pay Family Needs: " + family_needs, button_style);
   family_needs_text.setTextBounds(20, 140, 140, 45);
-  pet_food_text = game.add.text(0, 0, "Pay Pet Food: " + pet_food, style);
+  pet_food_text = game.add.text(0, 0, "Pay Pet Food: " + pet_food, button_style);
   pet_food_text.setTextBounds(20, 180, 140, 45);
 
   // Upgrade button hover text
@@ -115,10 +125,16 @@ function create() {
   home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 
   // Lottery button hover text
+<<<<<<< HEAD
   lottery_hover_text = game.add.text(748, 290, "", style);
   lottery_button.events.onInputOver.add(lotteryHover, this);
   lottery_button.events.onInputUp.add(lotteryHover, this);
   lottery_button.events.onInputOut.add(upgradeTextOff, this);
+=======
+  //lottery_button.events.onInputOver.add(lotteryHover, this);
+  //lottery_button.events.onInputUp.add(lotteryHover, this);
+  //lottery_button.events.onInputOut.add(upgradeTextOff, this);
+>>>>>>> 9337c453f69a15ab4e8b3b030ee787fd9f9a1f63
 }
 
 function payHouse() {
@@ -165,9 +181,11 @@ function buyHouse() {
   if (home_type == "Basement") {
     home_rent = 600;
     home_type = "Shared Apartment";
+    background.loadTexture('sharedApt', 0);
   } else if (home_type == "Shared Apartment") {
     home_rent = 1200;
     home_type = "Single Apartment";
+    background.loadTexture('singleApt', 0);
   } else if (home_type == "Single Apartment") {
     home_rent = 2000;
     home_type = "House";
@@ -271,7 +289,6 @@ function buyPet() {
 
     pet_upgrade_button.input.stop();
     pet_upgrade_button.destroy();
-    upgrade_text.setText("");
   }
   pet_food_text.setText("Pay Pet Food: " + pet_food);
 }
@@ -311,6 +328,8 @@ function homeHover() {
   } else if (home_type == "Single Apartment") {
     upgrade_text.setText("House")
   } else if (home_type == "House") {
+    upgrade_text.setText("Vacation Home");
+  } else if (home_type == "Vacation Home") {
     upgrade_text.setText("Mansion");
   }
 }
@@ -322,7 +341,7 @@ function carHover() {
     upgrade_text.setText("Motorcycle");
   } else if (car_type == "Motorcycle") {
     upgrade_text.setText("Used Car");
-  }else if (car_type == "Used Car") {
+  } else if (car_type == "Used Car") {
     upgrade_text.setText("New Car")
   } else if (car_type == "New Car") {
     upgrade_text.setText("Sports Car");
