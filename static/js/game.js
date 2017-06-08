@@ -68,7 +68,7 @@ function create() {
 
   var general_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4" };
   var button_style = { font: "16px Arial", fill: "#f0f0f0", boundsAlignH: "center", boundsAlignV: "middle" };
-  var hover_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4", boundsAlignH: "center", boundsAlignV: "middle" };
+  var hover_style = { font: "16px Arial", fill: "#ffffff", stroke: "#000000", strokeThickness: "4", boundsAlignH: "center", align: "center" };
 
   // Background
   background = game.add.sprite(0, 0, 'basement');
@@ -194,14 +194,20 @@ function buyHouse() {
     home_rent = 2000;
     home_type = "House";
     background.loadTexture('house', 0);
+    cash -= 5000;
+    cash_text.setText("Cash: " + cash);
   } else if (home_type == "House") {
     home_rent = 3500;
     home_type = "Vacation Home";
     background.loadTexture('vacationHouse', 0);
+    cash -= 15000;
+    cash_text.setText("Cash: " + cash);
   } else if (home_type == "Vacation Home") {
     home_rent = 5000;
     home_type = "Mansion";
     background.loadTexture('mansion', 0);
+    cash -= 25000;
+    cash_text.setText("Cash: " + cash);
 
     home_upgrade_button.input.stop();
     home_upgrade_button.destroy();
@@ -218,24 +224,35 @@ function buyHouse() {
 
 function buyCar() {
   if (car_type == "Shoes") {
-    car_loan = 0;
+    car_loan = 25;
     car_type = "Bicycle";
     car_sprite = game.add.sprite(750, 340, 'bicycle');
+    cash -= 325;
+    cash_text.setText("Cash: " + cash);
   } else if (car_type == "Bicycle") {
-    car_loan = 50;
+    car_loan = 100;
     car_type = "Motorcycle";
     car_sprite.loadTexture('motorcycle', 0);
+    cash -= 1500;
+    cash_text.setText("Cash: " + cash);
   } else if (car_type == "Motorcycle") {
     car_loan = 150;
     car_type = "Used Car";
     car_sprite.loadTexture('oldCar', 0);
+    cash -= 3000;
+    cash_text.setText("Cash: " + cash);
   } else if (car_type == "Used Car") {
     car_loan = 650;
     car_type = "New Car"
     car_sprite.loadTexture('newCar', 0);
+    cash -= 2000;
+    cash_text.setText("Cash: " + cash);
   } else if (car_type == "New Car") {
     car_loan = 1300;
     car_type = "Sports Car"
+    cash -= 8000;
+    cash_text.setText("Cash: " + cash);
+
     car_sprite.loadTexture('sportsCar', 0);
     car_upgrade_button.input.stop();
     car_upgrade_button.destroy();
@@ -256,18 +273,26 @@ function buyFamily() {
     family_needs = 1000;
     family_type = "Spouse";
     spouse_sprite = game.add.sprite(250, 330, 'adultHuman');
+    cash -= 10000;
+    cash_text.setText("Cash: " + cash);
   } else if (family_type == "Spouse") {
     family_needs = 2000;
     family_type = "Spouse With A Child";
     child1_sprite = game.add.sprite(150, 405, 'childHuman');
+    cash -= 5000;
+    cash_text.setText("Cash: " + cash);
   } else if (family_type == "Spouse With A Child") {
     family_needs = 3000;
     family_type = "Spouse With Two Children";
     child2_sprite = game.add.sprite(100, 405, 'childHuman');
+    cash -= 5000;
+    cash_text.setText("Cash: " + cash);
   } else if (family_type == "Spouse With Two Children") {
     family_needs = 4000;
     family_type = "Spouse With Three Children";
     child3_sprite = game.add.sprite(50, 405, 'childHuman');
+    cash -= 5000;
+    cash_text.setText("Cash: " + cash);
 
     family_upgrade_button.input.stop();
     family_upgrade_button.destroy();
@@ -281,22 +306,32 @@ function buyPet() {
     pet_food = 10;
     pet_type = "Fish";
     pet_sprite = game.add.sprite(600, 400, 'petFish');
+    cash -= 100;
+    cash_text.setText("Cash: " + cash);
   } else if (pet_type == "Fish") {
     pet_food = 30;
     pet_type = "Turtle";
     pet_sprite.loadTexture('petTurtle', 0);
+    cash -= 20;
+    cash_text.setText("Cash: " + cash);
   } else if (pet_type == "Turtle") {
     pet_food = 100;
     pet_type = "Dog";
     pet_sprite.loadTexture('petDog', 0);
+    cash -= 250;
+    cash_text.setText("Cash: " + cash);
   } else if (pet_type == "Dog") {
-    pet_food = 150;
+    pet_food = 200;
     pet_type = "Exotic Cat";
     pet_sprite.loadTexture('petCat', 0);
+    cash -= 800;
+    cash_text.setText("Cash: " + cash);
   } else if (pet_type == "Exotic Cat") {
     pet_food = 500;
     pet_type = "Endangered Tiger";
     pet_sprite.loadTexture('petTiger', 0);
+    cash -= 3000;
+    cash_text.setText("Cash: " + cash);
 
     pet_upgrade_button.input.stop();
     pet_upgrade_button.destroy();
@@ -334,55 +369,55 @@ function upgradeTextOff() {
 
 function homeHover() {
   if (home_type == "Basement") {
-    upgrade_text.setText("Shared Apartment");
+    upgrade_text.setText("Shared Apartment\nDown Payment: 0\nRent: 600");
   } else if (home_type == "Shared Apartment") {
-    upgrade_text.setText("Single Apartment");
+    upgrade_text.setText("Single Apartment\nDown Payment: 0\nRent: 1200");
   } else if (home_type == "Single Apartment") {
-    upgrade_text.setText("House");
+    upgrade_text.setText("House\nDown Payment: 5000\nMortgage: 2000");
   } else if (home_type == "House") {
-    upgrade_text.setText("Vacation Home");
+    upgrade_text.setText("Vacation Home\nDown Payment: 15000\nMortgage: 3500");
   } else if (home_type == "Vacation Home") {
-    upgrade_text.setText("Mansion");
+    upgrade_text.setText("Mansion\nDown Payment: 25000\nMortgage: 5000");
   }
 }
 
 function carHover() {
   if (car_type == "Shoes") {
-    upgrade_text.setText("Bicycle");
+    upgrade_text.setText("Bicycle\nPrice: 325\nMaintenance: 25");
   } else if (car_type == "Bicycle") {
-    upgrade_text.setText("Motorcycle");
+    upgrade_text.setText("Motorcycle\nPrice: 1500\nInsurance: 100");
   } else if (car_type == "Motorcycle") {
-    upgrade_text.setText("Used Car");
+    upgrade_text.setText("Used Car\nPrice: 3000\nInsurance: 150");
   } else if (car_type == "Used Car") {
-    upgrade_text.setText("New Car");
+    upgrade_text.setText("New Car\nPrice: 2000\nLoan & Insurance: 600");
   } else if (car_type == "New Car") {
-    upgrade_text.setText("Sports Car");
+    upgrade_text.setText("Sports Car\nPrice: 8000\nLoan & Insurance: 1300");
   }
 }
 
 function familyHover() {
   if (family_type == "Single") {
-    upgrade_text.setText("Spouse");
+    upgrade_text.setText("Spouse\nMarriage: 10000\nLifestyle: 1000");
   } else if (family_type == "Spouse") {
-    upgrade_text.setText("Spouse With A Child");
+    upgrade_text.setText("Spouse With A Child\nChildbirth: 5000\nLifestyle: 2000");
   } else if (family_type == "Spouse With A Child") {
-    upgrade_text.setText("Spouse With Two Children");
+    upgrade_text.setText("Spouse With Two Children\nChildbirth: 5000\nLifestyle: 2000");
   } else if (family_type == "Spouse With Two Children") {
-    upgrade_text.setText("Spouse With Three Children");
+    upgrade_text.setText("Spouse With Three Children\nChildbirth: 5000\nLifestyle: 2000");
   }
 }
 
 function petHover() {
   if (pet_type == "None") {
-    upgrade_text.setText("Fish");
+    upgrade_text.setText("Fish\nPrice: 100\nFood: 10");
   } else if (pet_type == "Fish") {
-    upgrade_text.setText("Turtle");
+    upgrade_text.setText("Turtle\nPrice: 20\nFood: 30");
   } else if (pet_type == "Turtle") {
-    upgrade_text.setText("Dog");
+    upgrade_text.setText("Dog\nPrice: 250\nFood: 100");
   } else if (pet_type == "Dog") {
-    upgrade_text.setText("Exotic Cat");
+    upgrade_text.setText("Exotic Cat\nPrice: 800\nFood: 200");
   } else if (pet_type == "Exotic Cat") {
-    upgrade_text.setText("Endangered Tiger");
+    upgrade_text.setText("Endangered Tiger\nPrice: 3000\nFood: 500");
   }
 }
 
