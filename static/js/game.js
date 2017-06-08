@@ -10,7 +10,7 @@ var config = {
 var game = new Phaser.Game(config);
 
 var credit_score = 600;
-var income = 99;
+var income = 1;
 var cash = 0;
 
 var old_time = 0;
@@ -43,7 +43,7 @@ function create() {
   pet_upgrade_button = game.add.button(860, 30, 'square', buyPet, this, 1, 1, 1);
   lottery_upgrade_button = game.add.button(910, 30, 'square', buyLottery, this, 1, 1, 1);
 
-  credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "12px Arial", fill: "000000"});
+  credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, { font: "16px Arial", fill: "000000"});
   income_text = game.add.text(10, 570, "Income: " + income + "/hr", { font: "16px Arial", fill: "000000"});
   cash_text = game.add.text(430, 570, "Cash: " + cash, { font: "16px Arial", fill: "000000"});
   time_text = game.add.text(740, 570, "Time: " + time + " hours", { font: "16px Arial", fill: "000000"});
@@ -144,9 +144,23 @@ function buyPet() {
 // TODO: Accurate lottery chances with random jackpot
 function buyLottery() {
   cash -= 200;
+  //If the player spends more cash than they have, subtract the amount of cash
+  //less than 0 divided by 2 from their credit score
+  if (cash < 0) {
+    credit_score += Math.floor(cash / 2);
+    credit_score_text.setText("Credit Score: " + credit_score);
+    cash = 0
+  }
   cash_text.setText("Cash: " + cash);
-
-  // Random function here
+  for(i = 0; i < 100; i++) {
+    key = Math.floor((Math.random() * 300000000) + 1);
+    roll = Math.floor((Math.random() * 300000000) + 1);
+    if (key == roll) {
+      cash += Math.floor((Math.random()) + 1);
+      cash_text.setText("Cash: " + cash);
+      break;
+    }
+  }
 }
 
 function test() {
