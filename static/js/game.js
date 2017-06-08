@@ -37,7 +37,7 @@ var jobs = [["Freelance Developer", 8], ["Junior Software Engineer", 15], ["Seni
 var transportation = ["Shoes", "Bicycle", "Motorcycle", "Used Car", "New Car", "Sports Car"];
 
 function preload() {
-  game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
+  game.load.spritesheet('button', 'static/images/buttons.png', 200, 40);
   game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
   game.load.image('adultHuman', 'static/images/defaultperson.png');
   game.load.image('childHuman', 'static/images/child.png');
@@ -110,13 +110,13 @@ function create() {
 
   // Pay button text
   home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, button_style);
-  home_rent_text.setTextBounds(20, 60, 140, 45);
+  home_rent_text.setTextBounds(20, 60, 180, 45);
   car_loan_text = game.add.text(0, 0, "Pay Car Loan: " + car_loan, button_style);
-  car_loan_text.setTextBounds(20, 100, 140, 45);
+  car_loan_text.setTextBounds(20, 100, 180, 45);
   family_needs_text = game.add.text(0, 0, "Pay Family Needs: " + family_needs, button_style);
-  family_needs_text.setTextBounds(20, 140, 140, 45);
+  family_needs_text.setTextBounds(20, 140, 180, 45);
   pet_food_text = game.add.text(0, 0, "Pay Pet Food: " + pet_food, button_style);
-  pet_food_text.setTextBounds(20, 180, 140, 45);
+  pet_food_text.setTextBounds(20, 180, 180, 45);
 
   // Upgrade button hover text
   upgrade_text = game.add.text(0, 0, "", hover_style);
