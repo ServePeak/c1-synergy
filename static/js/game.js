@@ -41,6 +41,11 @@ function preload() {
   game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
   game.load.image('adultHuman', 'static/images/defaultperson.png');
   game.load.image('childHuman', 'static/images/child.png');
+  game.load.image('bicycle', 'static/images/bicycle.png');
+  game.load.image('motorcycle', 'static/images/motorcycle.png');
+  game.load.image('oldCar', 'static/images/oldcar.png');
+  game.load.image('newCar', 'static/images/car.png');
+  game.load.image('sportsCar', 'static/images/sportscar.png');
   game.load.image('petFish', 'static/images/fish.png');
   game.load.image('petTurtle', 'static/images/turtle.png');
   game.load.image('petDog', 'static/images/dog.png');
@@ -53,9 +58,9 @@ function preload() {
 function create() {
 
   game.stage.backgroundColor = '#fffff0';
-  
+
   var style = { font: "16px Arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
-  
+
   // Your character
   main_sprite = game.add.sprite(400, 320, 'adultHuman');
 
@@ -112,7 +117,7 @@ function create() {
 function payHouse() {
   cash -= home_rent;
   cash_text.setText("Cash: " + cash);
-  
+
   home_button.alpha = 0.5;
   home_button.setFrames(0, 0, 0);
   home_button.inputEnabled = false;
@@ -122,7 +127,7 @@ function payHouse() {
 function payCar() {
   cash -= car_loan;
   cash_text.setText("Cash: " + cash);
-  
+
   car_button.alpha = 0.5;
   car_button.setFrames(0, 0, 0);
   car_button.inputEnabled = false;
@@ -132,7 +137,7 @@ function payCar() {
 function payFamily() {
   cash -= family_needs;
   cash_text.setText("Cash: " + cash);
-  
+
   family_button.alpha = 0.5;
   family_button.setFrames(0, 0, 0);
   family_button.inputEnabled = false;
@@ -142,7 +147,7 @@ function payFamily() {
 function payPet() {
   cash -= pet_food;
   cash_text.setText("Cash: " + cash);
-  
+
   pet_button.alpha = 0.5;
   pet_button.setFrames(0, 0, 0);
   pet_button.inputEnabled = false;
@@ -181,18 +186,23 @@ function buyCar() {
   if (car_type == "Shoes") {
     car_loan = 0;
     car_type = "Bicycle";
+    car_sprite = game.add.sprite(700, 400, 'bicycle');
   } else if (car_type == "Bicycle") {
     car_loan = 50;
     car_type = "Motorcycle";
+    car_sprite.loadTexture('motorcycle', 0);
   } else if (car_type == "Motorcycle") {
     car_loan = 150;
     car_type = "Used Car";
+    car_sprite.loadTexture('oldCar', 0);
   } else if (car_type == "Used Car") {
     car_loan = 650;
     car_type = "New Car"
+    car_sprite.loadTexture('newCar', 0);
   } else if (car_type == "New Car") {
     car_loan = 1300;
     car_type = "Sports Car"
+    car_sprite.loadTexture('sportsCar', 0);
     car_upgrade_button.input.stop();
     car_upgrade_button.destroy();
   }
@@ -219,7 +229,7 @@ function buyFamily() {
   } else if (family_type == "Married With Two Children") {
     family_needs = 4000;
     family_type = "Married With Three Children";
-    
+
     family_upgrade_button.input.stop();
     family_upgrade_button.destroy();
   }
@@ -335,7 +345,7 @@ function update() {
   var current_time = this.game.time.totalElapsedSeconds();
   var hours;
   var months;
-  
+
   // 0.082 to convert 1 month in hours to a minute
   if (old_time + 0.082 < current_time) {
     old_time = current_time;
@@ -351,32 +361,32 @@ function update() {
     months = months % 13;
     time_text.setText("Time: " + years + " years " + months + " months " + hours + " hours");
   }
-  
+
   // Enable buttons again on new month
   if (button_time < months) {
     button_time = months;
-      
+
     home_button.alpha = 1.0;
     home_button.setFrames(1, 1, 2);
     home_button.inputEnabled = true;
     home_rent_text.addColor("#000000", 0);
-    
+
     car_button.alpha = 1.0;
     car_button.setFrames(1, 1, 2);
     car_button.inputEnabled = true;
     car_loan_text.addColor("#000000", 0);
-    
+
     family_button.alpha = 1.0;
     family_button.setFrames(1, 1, 2);
     family_button.inputEnabled = true;
     family_needs_text.addColor("#000000", 0);
-    
+
     pet_button.alpha = 1.0;
     pet_button.setFrames(1, 1, 2);
     pet_button.inputEnabled = true;
     pet_food_text.addColor("#000000", 0);
   }
-  
+
   // Only earn income for first 8 hours per day
   if (income_time + 8 >= hours) {
     cash += income;
@@ -387,5 +397,5 @@ function update() {
 }
 
 function render() {
-   
+
 }
