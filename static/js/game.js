@@ -25,6 +25,12 @@ var pet_food = 0;
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 160, 40);
   game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
+  game.load.image('petFish', 'static/images/fish.png');
+  game.load.image('petTurtle', 'static/images/turtle.png');
+  game.load.image('petDog', 'static/images/dog.png');
+  game.load.image('petCat', 'static/images/cat.png');
+  game.load.image('petTiger', 'static/images/tiger.png');
+
   game.stage.disableVisibilityChange = true;
 }
 
@@ -83,7 +89,7 @@ function buyHouse() {
     home_rent = 2000;
   } else if (home_rent == 2000) {
     home_rent = 5000;
-  } else {
+
     house_upgrade_button.input.stop();
     house_upgrade_button.destroy();
   }
@@ -100,7 +106,7 @@ function buyCar() {
     car_loan = 2000;
   } else if (car_loan == 2000) {
     car_loan = 5000;
-  } else {
+
     car_upgrade_button.input.stop();
     car_upgrade_button.destroy();
   }
@@ -117,7 +123,7 @@ function buyFamily() {
     family_needs = 2000;
   } else if (family_needs == 2000) {
     family_needs = 5000;
-  } else {
+    
     family_upgrade_button.input.stop();
     family_upgrade_button.destroy();
   }
@@ -127,14 +133,21 @@ function buyFamily() {
 // TODO: More accurate pet food prices
 function buyPet() {
   if (pet_food == 0) {
+    pet_food = 300;
+    pet_sprite = game.add.sprite(200, 200, 'petFish');
+  } else if (pet_food == 300) {
     pet_food = 600;
+    pet_sprite.loadTexture('petTurtle', 0);
   } else if (pet_food == 600) {
+    pet_food = 900;
+    pet_sprite.loadTexture('petDog', 0);
+  } else if (pet_food == 900) {
     pet_food = 1200;
+    pet_sprite.loadTexture('petCat', 0);
   } else if (pet_food == 1200) {
-    pet_food = 2000;
-  } else if (pet_food == 2000) {
-    pet_food = 5000;
-  } else {
+    pet_food = 1500;
+    pet_sprite.loadTexture('petTiger', 0);
+
     pet_upgrade_button.input.stop();
     pet_upgrade_button.destroy();
   }
@@ -146,11 +159,11 @@ function buyLottery() {
   cash -= 200;
   //If the player spends more cash than they have, subtract the amount of cash
   //less than 0 divided by 2 from their credit score
-  if (cash < 0) {
+  /*if (cash < 0) {
     credit_score += Math.floor(cash / 2);
     credit_score_text.setText("Credit Score: " + credit_score);
     cash = 0
-  }
+  }*/
   cash_text.setText("Cash: " + cash);
   for(i = 0; i < 100; i++) {
     key = Math.floor((Math.random() * 300000000) + 1);
@@ -161,11 +174,6 @@ function buyLottery() {
       break;
     }
   }
-}
-
-function test() {
-  credit_score++;
-  credit_score_text.setText("Credit Score: " + credit_score);
 }
 
 function update() {
