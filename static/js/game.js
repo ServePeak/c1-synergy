@@ -38,7 +38,11 @@ var transportation = ["Shoes", "Bicycle", "Motorcycle", "Used Car", "New Car", "
 
 function preload() {
   game.load.spritesheet('button', 'static/images/buttons.png', 200, 40);
-  game.load.spritesheet('square', 'static/images/itsasquare.png', 50, 50);
+  game.load.image('homeUpgrade', 'static/images/houseupgrade.png');
+  game.load.image('carUpgrade', 'static/images/bikeupgrade.png');
+  game.load.image('familyUpgrade', 'static/images/stickupgrade.png');
+  game.load.image('petUpgrade', 'static/images/petupgrade.png');
+  game.load.image('lotteryTicket', 'static/images/lottery.png');
   game.load.image('adultHuman', 'static/images/defaultperson.png');
   game.load.image('childHuman', 'static/images/child.png');
   game.load.image('basement', 'static/images/basement.png');
@@ -91,11 +95,11 @@ function create() {
   pet_button.inputEnabled = false;
 
   // Upgrade buttons (top-right)
-  home_upgrade_button = game.add.button(760, 50, 'square', buyHouse, this, 1, 1, 1);
-  car_upgrade_button = game.add.button(810, 50, 'square', buyCar, this, 1, 1, 1);
-  family_upgrade_button = game.add.button(860, 50, 'square', buyFamily, this, 1, 1, 1);
-  pet_upgrade_button = game.add.button(910, 50, 'square', buyPet, this, 1, 1, 1);
-  lottery_button = game.add.button(835, 230, 'square', buyLottery, this, 1, 1, 1);
+  home_upgrade_button = game.add.button(780, 50, 'homeUpgrade', buyHouse, this, 1, 1, 1);
+  car_upgrade_button = game.add.button(830, 50, 'carUpgrade', buyCar, this, 1, 1, 1);
+  family_upgrade_button = game.add.button(880, 50, 'familyUpgrade', buyFamily, this, 1, 1, 1);
+  pet_upgrade_button = game.add.button(930, 50, 'petUpgrade', buyPet, this, 1, 1, 1);
+  lottery_button = game.add.button(900, 480, 'lotteryTicket', buyLottery, this, 1, 1, 1);
 
   // The various text that the user needs to know
   credit_score_text = game.add.text(10, 20, "Credit Score: " + credit_score, general_style);
@@ -105,8 +109,8 @@ function create() {
   home_text = game.add.text(10, 280, "Home: " + homes[home_level], general_style);
   car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], general_style);
   job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], general_style);
-  upgrade_info = game.add.text(820, 20, "Upgrades", general_style);
-  lottery_text = game.add.text(835, 210, "Lottery", general_style);
+  upgrade_info = game.add.text(840, 20, "Upgrades", general_style);
+  lottery_text = game.add.text(910, 450, "Lottery", general_style);
 
   // Pay button text
   home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, button_style);
@@ -120,7 +124,7 @@ function create() {
 
   // Upgrade button hover text
   upgrade_text = game.add.text(0, 0, "", hover_style);
-  upgrade_text.setTextBounds(760, 110, 200, 0);
+  upgrade_text.setTextBounds(780, 110, 200, 0);
   pet_upgrade_button.events.onInputOver.add(petHover, this);
   pet_upgrade_button.events.onInputUp.add(petHover, this);
   pet_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
@@ -135,7 +139,7 @@ function create() {
   home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 
   // Lottery button hover text
-  lottery_hover_text = game.add.text(800, 290, "", hover_style);
+  lottery_hover_text = game.add.text(875, 540, "", hover_style);
   lottery_button.events.onInputOver.add(lotteryHover, this);
   lottery_button.events.onInputUp.add(lotteryHover, this);
   lottery_button.events.onInputOut.add(upgradeTextOff, this);
@@ -460,7 +464,7 @@ function petHover() {
 }
 
 function lotteryHover() {
-  lottery_hover_text.setText("Buy lottery tickets");
+  lottery_hover_text.setText("100 Tickets: 200");
 }
 
 function update() {
