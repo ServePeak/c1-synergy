@@ -86,7 +86,7 @@ function create() {
   car_text = game.add.text(10, 300, "Transportation: " + transportation[car_level], { font: "16px Arial", fill: "#000000"});
   job_text = game.add.text(10, 320, "Job: " + jobs[job_level][0], { font: "16px Arial", fill: "#000000"});
   upgrade_info = game.add.text(770, 20, "Upgrades", { font: "16px Arial", fill: "#000000"});
-  lottery_text = game.add.text(780, 210, "Lottery", { font: "16px Arial", fill: "#000000"});
+  lottery_text = game.add.text(785, 210, "Lottery", { font: "16px Arial", fill: "#000000"});
 
   // Pay button text
   home_rent_text = game.add.text(0, 0, "Pay Rent: " + home_rent, style);
@@ -115,6 +115,7 @@ function create() {
   home_upgrade_button.events.onInputOut.add(upgradeTextOff, this);
 
   // Lottery button hover text
+  lottery_hover_text = game.add.text(732, 290, "", style);
   lottery_button.events.onInputOver.add(lotteryHover, this);
   lottery_button.events.onInputUp.add(lotteryHover, this);
   lottery_button.events.onInputOut.add(upgradeTextOff, this);
@@ -299,6 +300,7 @@ function buyLottery() {
 
 function upgradeTextOff() {
     upgrade_text.setText("");
+    lottery_hover_text.setText("");
 }
 
 function homeHover() {
@@ -351,6 +353,10 @@ function petHover() {
   } else if (pet_type == "Exotic Cat") {
     upgrade_text.setText("Endangered Tiger");
   }
+}
+
+function lotteryHover() {
+  lottery_hover_text.setText("Buy 100 lottery tickets");
 }
 
 function update() {
