@@ -16,6 +16,7 @@ var cash = 0;
 var old_time = 0;
 var real_time = 0;
 var income_time = 0;
+var button_time = 0;
 var time = 0;
 
 var home_rent = 0;
@@ -88,7 +89,7 @@ function payHouse() {
   cash_text.setText("Cash: " + cash);
   
   home_button.alpha = 0.5;
-  home_button.setFrames(0,0,0);
+  home_button.setFrames(0, 0, 0);
   home_button.inputEnabled = false;
   home_rent_text.addColor("#f0f0f0", 0);
 }
@@ -98,7 +99,7 @@ function payCar() {
   cash_text.setText("Cash: " + cash);
   
   car_button.alpha = 0.5;
-  car_button.setFrames(0,0,0);
+  car_button.setFrames(0, 0, 0);
   car_button.inputEnabled = false;
   car_loan_text.addColor("#f0f0f0", 0);
 }
@@ -108,7 +109,7 @@ function payFamily() {
   cash_text.setText("Cash: " + cash);
   
   family_button.alpha = 0.5;
-  family_button.setFrames(0,0,0);
+  family_button.setFrames(0, 0, 0);
   family_button.inputEnabled = false;
   family_needs_text.addColor("#f0f0f0", 0);
 }
@@ -118,7 +119,7 @@ function payPet() {
   cash_text.setText("Cash: " + cash);
   
   pet_button.alpha = 0.5;
-  pet_button.setFrames(0,0,0);
+  pet_button.setFrames(0, 0, 0);
   pet_button.inputEnabled = false;
   pet_food_text.addColor("#f0f0f0", 0);
 }
@@ -243,22 +244,23 @@ function upgradeTextOff() {
 }
 
 function petHover() {
-    if (pet_type == "None") {
-        upgrade_text.setText("Fish");
-    } else if (pet_type == "Fish") {
-        upgrade_text.setText("Turtle");
-    } else if (pet_type == "Turtle") {
-        upgrade_text.setText("Dog")
-    } else if (pet_type == "Dog") {
-        upgrade_text.setText("Exotic Cat");
-    } else if (pet_type == "Exotic Cat") {
-        upgrade_text.setText("Endangered Tiger");
-    }
+  if (pet_type == "None") {
+    upgrade_text.setText("Fish");
+  } else if (pet_type == "Fish") {
+    upgrade_text.setText("Turtle");
+  } else if (pet_type == "Turtle") {
+    upgrade_text.setText("Dog")
+  } else if (pet_type == "Dog") {
+    upgrade_text.setText("Exotic Cat");
+  } else if (pet_type == "Exotic Cat") {
+    upgrade_text.setText("Endangered Tiger");
+  }
 }
 
 function update() {
   var current_time = this.game.time.totalElapsedSeconds();
   var hours;
+  var months;
   
   // 0.082 to convert 1 month in hours to a minute
   if (old_time + 0.082 < current_time) {
@@ -268,23 +270,48 @@ function update() {
 
   // Time display values
   if (old_time == real_time) {
-      time++;
-      hours = time % 720;
-      months = Math.floor(time / 720);
-      years = Math.floor(time / 8640)
-      months = months % 13;
-      time_text.setText("Time: " + years + " years " + months + " months " + hours + " hours");
+    time++;
+    hours = time % 720;
+    months = Math.floor(time / 720);
+    years = Math.floor(time / 8640)
+    months = months % 13;
+    time_text.setText("Time: " + years + " years " + months + " months " + hours + " hours");
+  }
+  
+  // Enable buttons again on new month
+  if (button_time < months) {
+    button_time = months;
+      
+    home_button.alpha = 1.0;
+    home_button.setFrames(1, 1, 2);
+    home_button.inputEnabled = true;
+    home_rent_text.addColor("#000000", 0);
+    
+    car_button.alpha = 1.0;
+    car_button.setFrames(1, 1, 2);
+    car_button.inputEnabled = true;
+    car_loan_text.addColor("#000000", 0);
+    
+    family_button.alpha = 1.0;
+    family_button.setFrames(1, 1, 2);
+    family_button.inputEnabled = true;
+    family_needs_text.addColor("#000000", 0);
+    
+    pet_button.alpha = 1.0;
+    pet_button.setFrames(1, 1, 2);
+    pet_button.inputEnabled = true;
+    pet_food_text.addColor("#000000", 0);
   }
   
   // Only earn income for first 8 hours per day
   if (income_time + 8 >= hours) {
-      cash += income;
-      cash_text.setText("Cash: " + cash);
+    cash += income;
+    cash_text.setText("Cash: " + cash);
   } else if (income_time + 24 < hours) {
-      income_time = hours;
+    income_time = hours;
   }
 }
 
 function render() {
-    
+   
 }
